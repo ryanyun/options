@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include AASM
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -7,6 +9,30 @@ class User < ActiveRecord::Base
 
   has_many :contracts, foreign_key: :seller_id, class_name: 'Contract'
   has_many :bids, through: :contracts
+
+  aasm do
+    state :listed, initial: true
+    state :pending
+    state :accepted
+    state :confirmed
+    state :secured
+
+    event :pend do
+      transitions from: :listed, to: :pending
+    end
+
+    event :accept do
+      transitions from: :pending, to: :accepted
+    end
+
+    event :confirmed do
+      transitions from: :accepted, to: :confirmed
+    end
+
+    event :secure do
+      transitions from: :confirmed, to: :secured
+    end
+  end
 
   class << self
     def from_omniauth(auth)
@@ -40,7 +66,6 @@ class User < ActiveRecord::Base
         end
       end
     end
-
   end
 
   def have_offers?

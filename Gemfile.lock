@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   remote: https://dresssed.com/gems/1e93f8c6209368f4fe1c/
   specs:
+    aasm (4.3.0)
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
       actionview (= 4.2.0)
@@ -193,6 +194,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   awesome_print
   byebug
   coffee-rails (~> 4.1.0)
