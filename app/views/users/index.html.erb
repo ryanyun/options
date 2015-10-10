@@ -10,7 +10,7 @@
       Contract #<%= c.id %>
       <ul>
         <% c.bids.each do |b| %>
-          <li>Offer from <%= User.find(b.bidder_id).email%></li>
+          <li>Offer from <%= User.find(b.bidder_id).fullname %></li>
         <% end %>
       </ul>
     <% end %>

@@ -2,6 +2,7 @@ class BidsController < ApplicationController
   def create
     @bid = Bid.new(bid_params)
     if @bid.save
+      @bid.contract.pend!
       flash[:notice] = 'Successfully placed bid.'
       redirect_to root_path
     else

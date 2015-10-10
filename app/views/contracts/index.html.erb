@@ -3,7 +3,7 @@
   <ul>
     <% @contracts.each do |c| %>
       <li>
-        <%= User.find(c.seller_id).first_name %> is offering <%= c.amount %> for <%= c.price %> until <%= c.end_time %>
+        <%= User.find(c.seller_id).fullname %> is offering <%= c.amount %> for <%= c.price %> until <%= c.end_time %>
         <% if !c.bids.where(bidder_id: current_user.id).empty? %>
           <i>Bid Pending</i>
         <% elsif c.seller_id != current_user.id %>
