@@ -5,22 +5,11 @@ contract Option{
   uint asset;
   bytes32 error;
 
-  function setAddresses(address registeredSeller, address registeredBuyer){
-    buyer = registeredBuyer;
-    seller = registeredSeller;
-  }
-  function setExpirationTime(uint expirationSeconds){
-    expiration = block.timestamp + expirationSeconds;
-  }
-
-  function saveAsset(uint assetValue){
-    asset = assetValue;
-  }
-
   function createOption(address registeredSeller, address registeredBuyer, uint expirationSeconds, uint assetValue){
-    saveAsset(assetValue);
-    setAddresses(registeredSeller,registeredBuyer);
-    setExpirationTime(expirationSeconds);
+    seller = registeredSeller;
+    buyer = registeredBuyer;
+    expiration = block.timestamp + expirationSeconds;
+    asset = assetValue;
   }
 
   function exercise(){
@@ -30,6 +19,10 @@ contract Option{
     else {
       error = "Option has not expired!";
     }
+  }
+
+  function getOptionExpiration() returns (uint expiration){
+    return expiration;
   }
 
 
