@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151010195547) do
+ActiveRecord::Schema.define(version: 20151010202158) do
+
+  create_table "bids", force: :cascade do |t|
+    t.integer  "bidder_id"
+    t.integer  "contract_id"
+    t.boolean  "seller_confirmed?", default: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
 
   create_table "contracts", force: :cascade do |t|
     t.integer  "buyer_id"

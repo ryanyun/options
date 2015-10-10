@@ -1,3 +1,16 @@
 <h1>Welcome. What would you like to do today?</h1>
 <p><%= link_to 'I would like to buy', contracts_path %></p>
 <p><%= link_to 'I would like to sell', new_contract_path %></p>
+
+<% if current_user.have_offers? %>
+  <div class="offers">
+    <h1>Offers</h1>
+    <ul>
+      <% Contract.where(seller_id: current_user).each do |c| %>
+        <% c.bids.each do |b| %>
+          <li>Offer from <%= User.find(b.bidder_id).email%> for Contract #<%= c.id %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

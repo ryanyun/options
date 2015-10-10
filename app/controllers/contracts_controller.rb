@@ -12,6 +12,7 @@ class ContractsController < ApplicationController
     e = new_datetime(contract_params["end_time(1i)"], contract_params["end_time(2i)"], contract_params["end_time(3i)"], contract_params["end_time(4i)"], contract_params["end_time(5i)"])
     @contract = Contract.new(format_params(contract_params, s, e))
     if @contract.save
+      flash[:notice] = 'Successfully created contract.'
       redirect_to root_path
     else
       flash[:notice] = 'Error! Contract cannot be saved. Try again.'
