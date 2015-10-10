@@ -5,12 +5,15 @@
 <% if current_user.have_offers? %>
   <div class="offers">
     <h1>Offers</h1>
-    <ul>
-      <% Contract.where(seller_id: current_user).each do |c| %>
+    
+    <% Contract.where(seller_id: current_user).each do |c| %>
+      Contract #<%= c.id %>
+      <ul>
         <% c.bids.each do |b| %>
-          <li>Offer from <%= User.find(b.bidder_id).email%> for Contract #<%= c.id %></li>
+          <li>Offer from <%= User.find(b.bidder_id).email%></li>
         <% end %>
-      <% end %>
-    </ul>
+      </ul>
+    <% end %>
+    
   </div>
 <% end %>

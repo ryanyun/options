@@ -4,7 +4,7 @@ class Contract < ActiveRecord::Base
   belongs_to :seller, foreign_key: :seller_id, class_name: 'User'
   has_many :bids
 
-  aasm state: :status do
+  aasm column: :status do
     state :listed, initial: true
     state :pending
     state :accepted
