@@ -1,5 +1,5 @@
 module ApplicationHelper
   def app_name
-    'Options'
+    'OptionsContract'
   end
 end

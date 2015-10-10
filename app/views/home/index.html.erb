@@ -8,7 +8,7 @@
           <span class="sr-only">Toggle navigation</span>
           <span>MENU</span>
         </button>
-        <a href="#" class="navbar-brand">OPTIONS</a>
+        <a href="#" class="navbar-brand">OptionsContract</a>
       </div>
       <div class="collapse navbar-collapse" id="navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -16,11 +16,9 @@
             <%= link_to 'Home', root_path %>
           </li>
           <li>
-            <a href="#">About</a>
-          </li>
-          <li>
             <%= link_to 'Login', new_user_session_path %>
          </li>
+         <li><%= link_to 'Sign Up', new_user_registration_path %></li>
        </ul>
      </div>
    </div>
@@ -30,12 +28,12 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-md-12">
-          <h2 class="text-xs-center">Amazing App Benefit</h2>
+          <h2 class="text-xs-center">Easily do invest in options with confidence!</h2>
         </div>
       </div>
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <p class="lead text-xs-center">This is the best application you could ever buy. You"d be crazy not to buy it. Especially as it"s been endorsed by the product teaching mafia.</p>
+          <p class="lead text-xs-center">Tired of investing carelessly? Invest with confidence with OptionContract!</p>
         </div>
       </div>
       <div class="row mt20">
@@ -43,8 +41,8 @@
           <form class="signup-form form-inline">
             <div class="text-center">
               <div class="form-group">
-                <input type="email" placeholder="Your email" class="form-control col-xs-12 mr10 mb10" required  pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"></input>
-                <input type="button" class="btn btn-outline-primary" value="Get an Invite &rarr;"></input>
+                <%= link_to 'Click to Log In', new_user_session_path, class: 'btn btn-outline-primary' %>
+                <%= link_to 'Click to Sign Up', new_user_registration_path, class: 'btn btn-outline-primary' %>
               </div>
             </div>
           </form>

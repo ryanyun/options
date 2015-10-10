@@ -4,7 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:coinbase]
-  
+
+  has_many :contracts, foreign_key: :seller_id, class_name: 'Contract'
+  has_many :bids, through: :contracts
+
   class << self
     def from_omniauth(auth)
       found_user = self.find_by(email: auth.info.email)
@@ -37,10 +40,10 @@ class User < ActiveRecord::Base
         end
       end
     end
-    
+
   end
-  
+
   def have_offers?
-    Contract.where(seller_id: self).select {|c| c.bids.exists?}.exists?
+    bids.exists?
   end
 end

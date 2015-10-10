@@ -31,6 +31,7 @@ gem 'coinbase'
 
 gem 'omniauth'
 gem 'omniauth-coinbase'
+gem 'faker'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -51,6 +52,8 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'dotenv-rails'
+
+  gem 'awesome_print'
 end
 
 source 'https://dresssed.com/gems/1e93f8c6209368f4fe1c/' do
