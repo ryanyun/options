@@ -1,0 +1,6 @@
+{
+  "code": "contract Option{\n  \n}",
+  "name": "Option",
+  "vmCode": "6060604052600a8060116000396000f30060606040526008565b00",
+  "symTab": {}
+}
