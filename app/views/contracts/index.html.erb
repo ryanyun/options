@@ -1,0 +1,6 @@
+<h1>Available Options</h1>
+<ul>
+  <% @contracts.each do |c| %>
+    <li><%= User.find(c.seller_id).email %> is offering <%= c.amount %> for <%= c.price %> until <%= c.end_time %></li>
+  <% end %>
+</ul>
