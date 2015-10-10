@@ -28,6 +28,9 @@ gem 'devise'
 
 gem 'coinbase'
 
+gem 'omniauth'
+gem 'omniauth-coinbase'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
