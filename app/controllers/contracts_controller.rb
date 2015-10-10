@@ -1,6 +1,6 @@
 class ContractsController < ApplicationController
   def index
-    @contracts = Contract.where(status: 'listed')
+    @contracts = Contract.where(status: 'listed').order(:end_time)
   end
   
   def new
