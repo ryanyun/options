@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  include AASM
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -10,33 +8,11 @@ class User < ActiveRecord::Base
   has_many :contracts, foreign_key: :seller_id, class_name: 'Contract'
   has_many :bids, through: :contracts
 
-  aasm do
-    state :listed, initial: true
-    state :pending
-    state :accepted
-    state :confirmed
-    state :secured
-
-    event :pend do
-      transitions from: :listed, to: :pending
-    end
-
-    event :accept do
-      transitions from: :pending, to: :accepted
-    end
-
-    event :confirmed do
-      transitions from: :accepted, to: :confirmed
-    end
-
-    event :secure do
-      transitions from: :confirmed, to: :secured
-    end
-  end
+  validates :uid, presence: true, uniqueness: { case_sensitive: false }
 
   class << self
     def from_omniauth(auth)
-      found_user = self.find_by(email: auth.info.email)
+      found_user = self.find_by(uid: auth.uid)
 
       if found_user.present?
         found_user.update_attributes(
@@ -46,11 +22,12 @@ class User < ActiveRecord::Base
         )
         found_user
       else
+        first_name = auth.info.name.split.first
+        last_name  = auth.info.name.split.last
         where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-          user.email = auth.info.email
           user.password = Devise.friendly_token[0,20]
-          user.first_name = auth.info.first_name
-          user.last_name = auth.info.last_name
+          user.first_name = first_name
+          user.last_name = last_name
           user.uid = auth.uid
           user.provider = auth.provider
           user.oauth_token = auth.credentials.token
@@ -61,7 +38,7 @@ class User < ActiveRecord::Base
 
     def new_with_session(params, session)
       super.tap do |user|
-        if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        if data = session["devise.coinbase_data"] && session["devise.coinbase_data"]["extra"]["raw_info"]
           user.email = data["email"] if user.email.blank?
         end
       end
@@ -70,5 +47,9 @@ class User < ActiveRecord::Base
 
   def have_offers?
     bids.exists?
+  end
+
+  def email_required?
+    false
   end
 end
