@@ -1,14 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Options</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<% content_for :navbar, render("layouts/user_nav") %>
 
-<%= yield %>
+<%= render :layout => "layouts/minimal" do %>
+  <div class="page-header">
+    <div class='container'>
+      <div class="row row-same-height">
+        <div class="col-md-12 col-sm-height col-middle">
+          <h2 class='m0'><%= @title %></h2>
+          <%= yield :description %>
+        </div>
+        <div class="col-md-2 col-sm-height col-middle">
+          <%= yield :actions %>
+        </div>
+      </div>
+    </div>
+  </div><!-- /.page-header -->
 
-</body>
-</html>
+  <div class='container'>
+    <div class='row'>
+      <%= render "layouts/flashes" %>
+    </div>
+  </div>
+
+  <div class='container-fluid'>
+      <div id="content" class="col-md-12">
+        <%= yield %>
+      </div> <!-- /#content -->
+  </div>
+<% end %>

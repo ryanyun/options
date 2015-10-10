@@ -1,0 +1,68 @@
+<% @title = "Log in" %>
+
+<div id="main" class='devise'>
+  <div class="container-fluid">
+    <div class="row">
+      <header class="text-center">
+        <h1>Options</h1>
+        <p class="p0 m0">Login</p>
+      </header>
+    </div>
+    <div class="row mt20">
+      <%= form_for resource, as: resource_name, url: session_path(resource_name),
+                             html: { class: "form-horizontal col-xs-12 col-md-6 col-md-offset-3" } do |f| %>
+
+        <%- if devise_mapping.omniauthable? %>
+          <p>
+            <%- resource_class.omniauth_providers.each do |provider| %>
+              <%= link_to fa_icon_tag("#{provider}-sign") + " Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: 'btn' %>
+            <% end -%>
+          </p>
+
+          <p>Or sign in using your ...</p>
+        <% end -%>
+
+        <div class="sheet form-sheet">
+          <div class="sheet-inner">
+            <%= f.form_group :email do |f| %>
+              <%= f.label :email, class: "form-label" %>
+              <%= f.email_field :email, autofocus: true, class: "" %>
+              <%= f.error_messages %>
+            <% end %>
+
+            <%= f.form_group :password do |f| %>
+              <%= f.label :password, class: "form-label" %>
+              <%= f.password_field :password %>
+              <%= f.error_messages %>
+            <% end %>
+          </div>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="form-sheet-footer">
+            <%= f.label :remember_me, class: "checkbox col-sm-6" do %>
+              <%= f.check_box :remember_me %> Remember me
+            <% end %>
+            <%= f.submit "Log in", class: 'btn btn-primary pull-right mr20' %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="row mt20">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 text-right">
+        <ul class="list-unstyled options">
+          <li class="col-xs-12 col-md-6"><a href="/users/sign_up">Sign up</a></li>
+          <%- if devise_mapping.recoverable? %>
+            <li class="col-xs-12 col-md-6"><%= link_to "Forgot your password?", new_password_path(resource_name) %></li>
+          <% end -%>
+          <%- if devise_mapping.confirmable? %>
+            <li class="col-xs-12 col-md-6"><%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %></li>
+          <% end -%>
+          <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) %>
+            <li class="col-xs-12 col-md-6"><%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %></li>
+          <% end -%>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

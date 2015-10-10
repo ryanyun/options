@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'pry'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -52,3 +53,6 @@ group :development, :test do
   gem 'dotenv-rails'
 end
 
+source 'https://dresssed.com/gems/1e93f8c6209368f4fe1c/' do
+  gem 'dresssed-ives'
+end

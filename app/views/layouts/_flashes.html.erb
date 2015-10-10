@@ -1,0 +1,13 @@
+<% if alert %>
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <%= fa_icon_tag "remove" %> <%= alert %>
+  </div>
+<% end %>
+
+<% if notice %>
+  <div class="alert alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <%= fa_icon_tag "info-sign" %> <%= notice %>
+  </div>
+<% end %>

@@ -1,0 +1,32 @@
+<% @title = "Request an Invite" %>
+
+<div id="main" class='devise'>
+  <div class="container-fluid">
+    <div class="row">
+      <header class="text-center">
+        <h1>My App</h1>
+        <p class="p0 m0">Request an Invite</p>
+      </header>
+    </div>
+    <div class="row mt20">
+      <%= form_for resource, as: resource_name, url: invitation_path(resource_name),
+          html: { class: "form-horizontal col-xs-12 col-md-6 col-md-offset-3", novalidate: true } do |f| %>
+        <div class="sheet form-sheet">
+          <div class="sheet-inner">
+            <% resource.class.invite_key_fields.each do |field| -%>
+              <%= f.form_group field do |f| %>
+                <%= f.label field, class: "form-label" %>
+                <%= f.text_field field, autofocus: true, class: ""  %>
+                <%= f.error_messages %>
+              <% end %>
+            <% end -%>
+          </div>
+        </div>
+
+        <div class="form-actions text-right">
+          <%= f.submit "Request an Invite", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

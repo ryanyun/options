@@ -1,0 +1,40 @@
+<% @title = "Change your password" %>
+<div id="main" class='devise'>
+  <div class="container-fluid">
+    <div class="row">
+      <header class="text-center">
+        <h1>My App</h1>
+        <p class="p0 m0">Change Your Password</p>
+      </header>
+    </div>
+    <div class="row mt20">
+      <%= form_for resource, as: resource_name, url: password_path(resource_name),
+                  html: { method: :put, class: "form-horizontal col-xs-12 col-md-6 col-md-offset-3" } do |f| %>
+        <%= f.error_notification %>
+
+        <%= f.hidden_field :reset_password_token %>
+        <%= f.error_messages_for :reset_password_token %>
+
+        <div class="sheet form-sheet form-inputs">
+          <div class="sheet-inner">
+            <%= f.form_group :password do |f| %>
+            <%= f.label :password, "New password", class: "form-label" %>
+            <%= f.password_field :password, class: "" %>
+            <%= f.error_messages %>
+            <% end %>
+
+            <%= f.form_group :password_confirmation do |f| %>
+            <%= f.label :password_confirmation, "Confirm your new password", class: "form-label" %>
+            <%= f.password_field :password_confirmation, class: "" %>
+            <%= f.error_messages %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="form-actions text-right">
+          <%= f.submit "Change my password", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
