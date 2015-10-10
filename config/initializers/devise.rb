@@ -236,6 +236,11 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  require 'omniauth-coinbase'
+  config.omniauth :coinbase,
+                  ENV['COINBASE_CLIENT_ID'],
+                  ENV['COINBASE_CLIENT_SECRET'],
+                  sandbox: true
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -259,4 +264,30 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  Rails.application.config.to_prepare do
+    Devise::SessionsController.layout "_minimal"
+    Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "_minimal" }
+    Devise::ConfirmationsController.layout "_minimal"
+    Devise::UnlocksController.layout "_minimal"
+    Devise::PasswordsController.layout "_minimal"
+  end
+
+Rails.application.config.to_prepare do
+  Devise::SessionsController.layout "_minimal"
+  Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "_minimal" }
+  Devise::ConfirmationsController.layout "_minimal"
+  Devise::UnlocksController.layout "_minimal"
+  Devise::PasswordsController.layout "_minimal"
+  Devise::InvitationsController.layout '_minimal' if defined?(DeviseInvitable)
+  DeviseInvitable::RegistrationsController.layout "_minimal" if defined?(DeviseInvitable)
+
+  Devise::Mailer.layout "email"
+end
+
+
+
+Devise::Mailer.send(:include, EmailTemplateHelper)
+
+Devise::Mailer.send(:helper, EmailTemplateHelper)
+
 end

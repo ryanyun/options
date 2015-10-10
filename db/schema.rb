@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151010175742) do
+ActiveRecord::Schema.define(version: 20151010195547) do
 
   create_table "contracts", force: :cascade do |t|
     t.integer  "buyer_id"
@@ -41,6 +41,12 @@ ActiveRecord::Schema.define(version: 20151010175742) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

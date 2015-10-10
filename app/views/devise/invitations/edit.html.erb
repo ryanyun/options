@@ -1,0 +1,40 @@
+<% @title = "Activate your Invite" %>
+
+<div id="main" class='devise'>
+  <div class="container-fluid">
+    <div class="row">
+      <header class="text-center">
+        <h1>My App</h1>
+        <p class="p0 m0">Accept your Invite</p>
+      </header>
+    </div>
+    <div class="row mt20">
+      <p class="text-center">Create a password to activate your invite.</p>
+      <%= form_for resource, as: resource_name, url: invitation_path(resource_name),
+      html: { method: :put, class: "form-horizontal col-xs-12 col-md-6 col-md-offset-3" } do |f| %>
+
+      <div class="sheet form-sheet">
+        <div class="sheet-inner">
+          <%= f.hidden_field :invitation_token %>
+
+          <%= f.form_group :password do |f| %>
+          <%= f.label :password, class: "form-label" %>
+          <%= f.password_field :password, autofocus: true, class: "" %>
+          <%= f.error_messages %>
+          <% end %>
+
+          <%= f.form_group :password do |f| %>
+          <%= f.label :password_confirmation, class: "form-label"  %>
+          <%= f.password_field :password_confirmation, class: "" %>
+          <%= f.error_messages %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="form-actions text-right">
+        <%= f.submit "Activate Invite", class: 'btn btn-outline-primary' %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -29,6 +29,9 @@ gem 'devise'
 
 gem 'coinbase'
 
+gem 'omniauth'
+gem 'omniauth-coinbase'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -50,3 +53,6 @@ group :development, :test do
   gem 'dotenv-rails'
 end
 
+source 'https://dresssed.com/gems/1e93f8c6209368f4fe1c/' do
+  gem 'dresssed-ives'
+end
