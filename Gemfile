@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'aasm'
 gem 'coinbase'
 gem 'coffee-rails', '~> 4.1.0'
