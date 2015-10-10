@@ -1,0 +1,4 @@
+<%= form_for(@contract) do |f| %>
+  <p>I am offering <%= f.text_field :amount %> bitcoins for a price of <%= f.text_field :price %> bitcoins until <%= f.datetime_select :end_time, default: 1.day.from_now %></p>
+  <%= f.submit %>
+<% end %>
