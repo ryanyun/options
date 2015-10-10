@@ -15,3 +15,15 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore other unneeded files
+*.swp
+*~
+.project
+.DS_Store
+.idea
+.secret
+coverage/
+public/system
+.env
+*.rdb
