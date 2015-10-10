@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def fullname
+    "#{first_name} #{last_name}"
+  end
+
   def have_offers?
     bids.exists?
   end
