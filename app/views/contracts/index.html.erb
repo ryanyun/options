@@ -1,6 +1,15 @@
-<h1>Available Options</h1>
-<ul>
-  <% @contracts.each do |c| %>
-    <li><%= User.find(c.seller_id).email %> is offering <%= c.amount %> for <%= c.price %> until <%= c.end_time %></li>
-  <% end %>
-</ul>
+<div class="options">
+  <h1>Available Options</h1>
+  <ul>
+    <% @contracts.each do |c| %>
+      <li>
+        <%= User.find(c.seller_id).email %> is offering <%= c.amount %> for <%= c.price %> until <%= c.end_time %>
+        <% if !c.bids.where(bidder_id: current_user.id).empty? %>
+          <i>Bid Pending</i>
+        <% elsif c.seller_id != current_user.id %>
+          <%= link_to "Bid", bids_path(bid: {bidder_id: current_user.id, contract_id: c.id}), method: :create  %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

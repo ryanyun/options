@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:coinbase]
-
+  
   class << self
     def from_omniauth(auth)
       found_user = self.find_by(email: auth.info.email)
@@ -37,5 +37,10 @@ class User < ActiveRecord::Base
         end
       end
     end
+    
+  end
+  
+  def have_offers?
+    Contract.where(seller_id: self).select {|c| c.bids.exists?}.exists?
   end
 end
