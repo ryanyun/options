@@ -237,7 +237,10 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   require 'omniauth-coinbase'
-  config.omniauth :coinbase, ENV['COINBASE_CLIENT_ID'], ENV['COINBASE_CLIENT_SECRET']
+  config.omniauth :coinbase,
+                  ENV['COINBASE_CLIENT_ID'],
+                  ENV['COINBASE_CLIENT_SECRET'],
+                  sandbox: true
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
