@@ -17,16 +17,15 @@ contract TestOption {
     asset = assetValue;
   }
 
-   function createOption(address registeredSeller, address registeredBuyer, uint assetValue,  uint expirationSeconds){
+   function createOption(address registeredSeller, address registeredBuyer, uint assetValue,  uint expirationTimeInSeconds){
     seller = registeredSeller;
     buyer = registeredBuyer;
     asset = assetValue;
-    expiration = now + expirationSeconds;
+    expiration = expirationTimeInSeconds;
   }
 
   function exercise() returns (uint retVal){
     if (now > expiration){
-      // buyer.send(asset);
       return 1;
     }
     else {
@@ -34,7 +33,7 @@ contract TestOption {
     }
   }
 
-  function getOptionExpiration() returns (uint expiration){
+  function getOptionExpiration() returns (uint retVal){
     return expiration;
   }
 

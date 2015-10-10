@@ -1,29 +1,41 @@
-contract Option{
+contract Option {
   address buyer;
   address seller;
-  uint expiration;
+  address self;
   uint asset;
-  bytes32 error;
+  uint expiration;
 
-  function createOption(address registeredSeller, address registeredBuyer, uint expirationSeconds, uint assetValue){
-    seller = registeredSeller;
-    buyer = registeredBuyer;
-    expiration = block.timestamp + expirationSeconds;
+  function getTime() returns (uint retVal){
+    return now;
+  }
+
+  function saveAsset(uint assetValue){
     asset = assetValue;
   }
 
-  function exercise(){
-    if (now > expiration){
-      buyer.send(asset);
+   function createOption(address registeredSeller, address registeredBuyer, uint assetValue,  uint expirationTimeInSeconds){
+    seller = registeredSeller;
+    buyer = registeredBuyer;
+    asset = assetValue;
+    self = this;
+    expiration = expirationTimeInSeconds;
+  }
+
+  function exercise() returns (uint retInt){
+    if (now >= expiration){
+      return 1;
     }
     else {
-      error = "Option has not expired!";
+      return 0;
     }
   }
 
-  function getOptionExpiration() returns (uint expiration){
+  function getOptionExpiration() returns (uint retVal){
     return expiration;
   }
 
+  function getContractAddress() returns (address selfAddress){
+    return this;
+  }
 
 }
