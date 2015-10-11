@@ -1,19 +1,27 @@
-<h1>Welcome. What would you like to do today?</h1>
-<p><%= link_to 'I would like to buy', contracts_path %></p>
-<p><%= link_to 'I would like to sell', new_contract_path %></p>
+<div class="users-index">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="user-actions text-center">
+        <%= link_to 'I would like to buy', contracts_path, class: 'btn btn-lg btn-primary' %>
+        <span>or</span>
+        <%= link_to 'I would like to sell', new_contract_path, class: 'btn btn-lg btn-primary' %>
+      </div>
 
-<% if current_user.have_offers? %>
-  <div class="offers">
-    <h1>Offers</h1>
-    
-    <% Contract.where(seller_id: current_user).each do |c| %>
-      Contract #<%= c.id %>
-      <ul>
-        <% c.bids.each do |b| %>
-          <li>Offer from <%= User.find(b.bidder_id).fullname %></li>
-        <% end %>
-      </ul>
-    <% end %>
-    
+      <% if current_user.have_offers? %>
+        <div class="offers-list well">
+          <h1>Offers</h1>
+
+          <% Contract.where(seller_id: current_user).each do |c| %>
+            Contract #<%= c.id %>
+            <ul>
+              <% c.bids.each do |b| %>
+                <li>Offer from <%= User.find(b.bidder_id).fullname %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>
+

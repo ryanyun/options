@@ -2,6 +2,7 @@ class Contract < ActiveRecord::Base
   include AASM
 
   belongs_to :seller, foreign_key: :seller_id, class_name: 'User'
+  belongs_to :bidder, foreign_key: :bidder_id, class_name: 'User'
   has_many :bids
 
   scope :available, -> { where(status: ['listed', 'pending']) }

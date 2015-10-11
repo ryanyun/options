@@ -1,4 +1,5 @@
 class ContractsController < ApplicationController
+  layout 'application'
   def index
     @contracts = Contract.available
   end
