@@ -21,6 +21,11 @@ class ContractsController < ApplicationController
     end
   end
   
+  def accept
+    @contract = Contract.find(params[:format])
+    @contract.accept!
+  end
+  
   private
   
     def contract_params
