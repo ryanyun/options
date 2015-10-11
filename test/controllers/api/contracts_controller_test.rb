@@ -17,4 +17,10 @@ class Api::ContractsControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal assigns(:contract), contract
   end
+
+  test 'DELETE destroy' do
+    contract = Contract.first
+    delete :destroy, id: contract.id, format: :json
+    assert_response :success
+  end
 end

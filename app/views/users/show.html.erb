@@ -6,7 +6,7 @@
           <% if @user.contracts.exists? -%>
             <h1>Your Listed Options</h1>
             <%= render partial: 'users/contracts_list',
-                locals: { contracts: @user.contracts} %>
+                locals: { contracts: @user.contracts } %>
           <% end %>
         <% if Bid.where(bidder_id: @user).exists? %>
             <h1>Your Bids</h1>

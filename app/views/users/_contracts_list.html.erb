@@ -11,7 +11,7 @@
   <tbody>
     <% contracts.each do |c| -%>
       <tr>
-        <td><%= c.seller_id == current_user.id ? 'You' : c.seller.fullname %></td>
+        <td><%= c.seller_id == current_user.id ? 'You' : c.seller.try(:fullname) %></td>
         <td><%= number_to_currency(c.amount) %></td>
         <td><%= number_to_currency(c.price) %></td>
         <td><%= c.end_time %></td>
