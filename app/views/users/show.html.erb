@@ -8,7 +8,7 @@
     <div class="row">
       <div class="left-timeline col-sm-6">
         <% if @user.contracts.exists? -%>
-          <%= render partial: 'contracts/contracts_list',
+          <%= render partial: 'users/contracts_list',
               locals: { contracts: @user.contracts} %>
         <% end %>
       </div>

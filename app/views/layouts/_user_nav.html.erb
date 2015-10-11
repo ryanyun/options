@@ -1,12 +1,48 @@
 <nav class='navbar'>
-  <div class='navbar-brand'>
-    <%= link_to 'Options', root_path %>
-  </div>
+  <ul class='nav navbar-nav'>
+    <li><%= link_to 'Options', root_path %></li>
+    <% if user_signed_in? %>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="main.html#" aria-expanded="false">Accepted Bids <span class="caret"></span></a>
+        <% if Bid.where(bidder_id: current_user).exists? && !Bid.where(bidder_id: current_user).select{|b| b.contract.accepted?}.empty? %>
+          <ul class="dropdown-menu">
+            <% Bid.where(bidder_id: current_user).select{|b| b.contract.accepted?}.select{|b| b.contract.accepted?}.each do |b| %>
+            <li class=""><%= User.find(b.contract.seller_id).fullname %> accepted your offer!<%= link_to 'Confirm', confirm_path(bid: b) %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </li>
+    
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="main.html#" aria-expanded="false">Pending Offers <span class="caret"></span></a>
+        <% if current_user.have_offers? %>
+          <ul class="dropdown-menu">
+            <% Contract.where(seller_id: current_user).each do |c| %>
+              <% c.bids.each do |b| %>
+                <li class=""><%= User.find(b.bidder_id).fullname %> for #<%= c.id %> <%= link_to 'Accept', accept_path(c) %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      </li>
+    
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="main.html#" aria-expanded="false">Confirmed Options <span class="caret"></span></a>
+        <% if Contract.where(status: 'confirmed').where("buyer_id = ? or seller_id = ?", current_user, current_user) %>
+          <ul class="dropdown-menu">
+            <% Contract.where(status: 'confirmed').where("buyer_id = ? or seller_id = ?", current_user, current_user).each do |c| %>
+              <li class="">Contract #<%= c.id %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  
   <div class="navbar-text pull-right">
     <% if user_signed_in? %>
       <%= fa_icon_tag "user" %> Welcome, <strong><%= current_user.fullname %></strong>
       <span class="divider">|</span>
       <%= link_to 'Profile', user_path(current_user) %>
+      <span class="divider">|</span>
+      <%= link_to 'Sell', new_contract_path %>
       <span class="divider">|</span>
       <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
     <% else %>
