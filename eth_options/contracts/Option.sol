@@ -9,11 +9,7 @@ contract Option {
     return now;
   }
 
-  function saveAsset(uint assetValue){
-    asset = assetValue;
-  }
-
-   function createOption(address registeredSeller, address registeredBuyer, uint assetValue,  uint expirationTimeInSeconds){
+  function createOption(address registeredSeller, address registeredBuyer, uint assetValue,  uint expirationTimeInSeconds){
     seller = registeredSeller;
     buyer = registeredBuyer;
     asset = assetValue;
@@ -23,19 +19,12 @@ contract Option {
 
   function exercise() returns (uint retInt){
     if (now >= expiration){
+      // buyer.send(asset)
       return 1;
     }
     else {
       return 0;
     }
-  }
-
-  function getOptionExpiration() returns (uint retVal){
-    return expiration;
-  }
-
-  function getContractAddress() returns (address selfAddress){
-    return this;
   }
 
 }
