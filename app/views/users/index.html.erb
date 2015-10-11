@@ -8,20 +8,19 @@
       </div>
 
       <% if current_user.have_offers? %>
-        <div class="offers-list well">
+        <div class="offers">
           <h1>Offers</h1>
 
           <% Contract.where(seller_id: current_user).each do |c| %>
+            <% if c.listed? || c.pending? %>
             Contract #<%= c.id %>
             <ul>
               <% c.bids.each do |b| %>
-                <li>Offer from <%= User.find(b.bidder_id).fullname %></li>
+                <li>Offer from <%= User.find(b.bidder_id).fullname %> <%= link_to 'Accept', accept_path(b) %></li>
               <% end %>
             </ul>
           <% end %>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
   </div>
 </div>
 

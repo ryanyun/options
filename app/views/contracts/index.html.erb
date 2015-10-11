@@ -6,11 +6,15 @@
         <ul>
           <% @contracts.each do |c| -%>
             <li>
-              <%= User.find(c.seller_id).fullname %> is offering <%= c.amount %> for <%= c.price %> until <%= c.end_time %>
-              <% if !c.bids.where(bidder_id: current_user.id).empty? %>
-                <i>Bid Pending</i>
-              <% elsif c.seller_id != current_user.id %>
-                <%= link_to "Bid", bids_path(bid: {bidder_id: current_user.id, contract_id: c.id}), method: :create  %>
+              <% if c.seller_id == current_user.id %>
+                You offered <%= c.amount %> bitcoin for <%= c.price %> bitcoin until <%= c.end_time %>
+              <% else %>
+                <%= User.find(c.seller_id).fullname %> is offering <%= c.amount %> bitcoin for <%= c.price %> bitcoin until <%= c.end_time %>
+                <% if c.bids.where(bidder_id: current_user.id).exists? %>
+                  <i>Bid Pending</i>
+                <% elsif c.seller_id != current_user.id %>
+                  <%= link_to "Bid", bids_path(bid: {bidder_id: current_user.id, contract_id: c.id}), method: :create  %>
+                <% end %>
               <% end %>
             </li>
           <% end %>
