@@ -5,16 +5,16 @@ contract Option {
   uint asset;
   uint expiration;
 
-  function getTime() returns (uint retVal){
-    return now;
+  function createOption(address registeredSeller, address registeredBuyer, uint assetValue,  uint expirationTimeInSeconds, uint expired){
+    saveAddresses(registeredSeller, registeredBuyer);
+    asset = assetValue;
+    expiration = expirationTimeInSeconds;
+    self = this;
   }
 
-  function createOption(address registeredSeller, address registeredBuyer, uint assetValue,  uint expirationTimeInSeconds){
+  function saveAddresses(address registeredSeller, address registeredBuyer) private {
     seller = registeredSeller;
     buyer = registeredBuyer;
-    asset = assetValue;
-    self = this;
-    expiration = expirationTimeInSeconds;
   }
 
   function exercise() returns (uint retInt){
@@ -27,4 +27,11 @@ contract Option {
     }
   }
 
+  function trade(address newBuyer){
+    buyer = newBuyer;
+  }
+
+  function getExpiration() returns (uint retVal) { return expiration; } 
+
+  function getAssetAmount() returns (uint retVal) { return asset; } 
 }
