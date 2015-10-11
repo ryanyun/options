@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :users, only: :index
   get '/accept' => 'contracts#accept'
 
+  get '/testing' => 'temptesting#test'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
