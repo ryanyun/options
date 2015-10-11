@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require dresssed
 //= require turbolinks
+//= require optionContract
 //= require_tree .
+

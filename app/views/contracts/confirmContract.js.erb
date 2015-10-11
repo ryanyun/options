@@ -1,0 +1,6 @@
+$.get("/api/contracts/"+"<%= contract.id %>", function(data) {
+  debugger;
+  var newOption = new OptionContract();
+  option.newOptionContract(data.seller_address,data.buyer_address,"9999999","1998");
+  window.location.replace("/");
+});
