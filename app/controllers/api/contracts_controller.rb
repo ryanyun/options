@@ -16,13 +16,13 @@ class Api::ContractsController < ApplicationController
   def index
     @contracts = Contract.
                  send(params[:status].present? ? params[:status].to_sym : :all)
-    render json: @contracts, status: 200
+    respond_with @contracts
   end
 
   api :GET, '/contracts/:id'
   param :id, :number, 'Id (primary key) of contract', required: true
   def show
-    render json: @contract, status: 200
+     respond_with @contract
   end
 
   api :POST, '/contracts'
@@ -39,12 +39,8 @@ class Api::ContractsController < ApplicationController
   end
   def create
     @contract = Contract.new(contract_params)
-
-    if @contract.save
-      render json: @contract, status: 202
-    else
-      render json: @contract, status: 422
-    end
+    @contract.save
+    respond_with @contract
   end
 
   api :PUT, '/contracts'
@@ -61,11 +57,8 @@ class Api::ContractsController < ApplicationController
     param :seller_confirmed?, [true, false]
   end
   def update
-    if @contract.update_attributes(contract_params)
-      render json: @contract, status: 202
-    else
-      render json: @contract, status: 422
-    end
+    @contract.update_attributes(contract_params)
+    respond_with @contract
   end
 
   api :DELETE, '/contracts/:id'
