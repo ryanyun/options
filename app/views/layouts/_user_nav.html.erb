@@ -15,7 +15,7 @@
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="main.html#" aria-expanded="false">Pending Offers <span class="caret"></span></a>
         <% if current_user.have_offers? %>
           <ul class="dropdown-menu">
-            <% Contract.where(seller_id: current_user).each do |c| %>
+            <% Contract.where(seller_id: current_user, status: 'pending').each do |c| %>
               <% c.bids.each do |b| %>
                 <li class=""><%= User.find(b.bidder_id).fullname %> for #<%= c.id %> <%= link_to 'Accept', accept_path(c) %></li>
               <% end %>
