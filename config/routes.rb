@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  apipie
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -13,6 +14,10 @@ Rails.application.routes.draw do
   get '/confirm' => 'contracts#confirm'
 
   get '/testing' => 'temptesting#test'
+
+  namespace :api do
+    resources :contracts
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

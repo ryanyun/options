@@ -1,11 +1,23 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+contract_one:
+  buyer_id: chris.id
+  seller_id: ryan.id
+  address: <%= Faker::Address.street_address %>
+  amount: 11.12
+  price: 12.34
+  start_time: <%= DateTime.now %>
+  end_time: <%= DateTime.now + 3.days %>
+  status: 'listed'
+  buyer_confirmed?: true
+  seller_confirmed?: false
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+contract_two:
+  buyer_id: ryan.id
+  seller_id: chris.id
+  address: <%= Faker::Address.street_address %>
+  amount: 11.12
+  price: 12.34
+  start_time: <%= DateTime.now %>
+  end_time: <%= DateTime.now + 3.days %>
+  status: 'listed'
+  buyer_confirmed?: true
+  seller_confirmed?: false
