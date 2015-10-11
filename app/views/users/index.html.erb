@@ -1,44 +1,9 @@
-<div class="users-index">
+<div class="contracts-index">
   <div class="row">
     <div class="col-sm-12">
-      <div class="user-actions text-center">
-        <%= link_to 'I would like to buy', contracts_path, class: 'btn btn-lg btn-primary' %>
-        <span>or</span>
-        <%= link_to 'I would like to sell', new_contract_path, class: 'btn btn-lg btn-primary' %>
-      </div>
-      <% if Bid.where(bidder_id: current_user).exists? && !Bid.where(bidder_id: current_user).select{|b| b.contract.accepted?}.empty? %>
-        <div class="accepted">
-          <h1>Accepted Bids</h1>
-          <% Bid.where(bidder_id: current_user).select{|b| b.contract.accepted?}.select{|b| b.contract.accepted?}.each do |b| %>
-          <li><%= User.find(b.contract.seller_id).fullname %> accepted your offer! <%= link_to 'Confirm', confirm_path(bid: b) %></li>
-          <% end %>
-        </div>
+      <% if @contracts.exists? -%>
+        <%= render partial: 'contracts_list', locals: { contracts: @contracts } %>
       <% end %>
-      <% if current_user.have_offers? %>
-        <div class="offers">
-          <h1>Offers</h1>
-
-          <% Contract.where(seller_id: current_user).each do |c| %>
-            <% if c.listed? || c.pending? %>
-            Contract #<%= c.id %>
-            <ul>
-              <% c.bids.each do |b| %>
-                <li>Offer from <%= User.find(b.bidder_id).fullname %> <%= link_to 'Accept', accept_path(c) %></li>
-              <% end %>
-            </ul>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
-      <% if Contract.where(status: 'confirmed').where("buyer_id = ? or seller_id = ?", current_user, current_user) %>
-        <div class="confirmed">
-          <h1>Confirmed Option Contracts</h1>
-          
-          <ul><% Contract.where(status: 'confirmed').where("buyer_id = ? or seller_id = ?", current_user, current_user).each do |c| %>
-            <li>Contract #<%= c.id %> Confirmed!!!</li>
-          <% end %></ul>
-        </div>
-      <% end %>
-  </div>
+    </div>
   </div>
 </div>
