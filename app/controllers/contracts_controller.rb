@@ -3,6 +3,7 @@ class ContractsController < ApplicationController
   
   def new
     @contract = Contract.new
+    @title ||= 'New Contract'
   end
   
   def create
