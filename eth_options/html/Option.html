@@ -70,11 +70,27 @@
 		  	<input class="form-control col-sm-12" type="text" name="registeredBuyer" placeholder="registeredBuyer" id="createOptionregisteredBuyer" />
 		  	<input class="form-control col-sm-12" type="text" name="assetValue" placeholder="assetValue" id="createOptionassetValue" />
 		  	<input class="form-control col-sm-12" type="text" name="expirationTimeInSeconds" placeholder="expirationTimeInSeconds" id="createOptionexpirationTimeInSeconds" />
+		  	<input class="form-control col-sm-12" type="text" name="expired" placeholder="expired" id="createOptionexpired" />
         <input class="form-control col-sm-12" type="value" name="'createOption'ValueField" placeholder="send value in Ether" id=" 'createOption'ValueField" />
 		    </div>
-	     	<div id="getTimeDiv">
-		  	<button class="btn col-sm-12" onclick="callFunc('getTime')">getTime</button>
-        <input class="form-control col-sm-12" type="value" name="'getTime'ValueField" placeholder="send value in Ether" id=" 'getTime'ValueField" />
+	     	<div id="saveAddressesDiv">
+		  	<button class="btn col-sm-12" onclick="callFunc('saveAddresses')">saveAddresses</button>
+		  	<input class="form-control col-sm-12" type="text" name="registeredSeller" placeholder="registeredSeller" id="saveAddressesregisteredSeller" />
+		  	<input class="form-control col-sm-12" type="text" name="registeredBuyer" placeholder="registeredBuyer" id="saveAddressesregisteredBuyer" />
+        <input class="form-control col-sm-12" type="value" name="'saveAddresses'ValueField" placeholder="send value in Ether" id=" 'saveAddresses'ValueField" />
+		    </div>
+	     	<div id="getAssetAmountDiv">
+		  	<button class="btn col-sm-12" onclick="callFunc('getAssetAmount')">getAssetAmount</button>
+        <input class="form-control col-sm-12" type="value" name="'getAssetAmount'ValueField" placeholder="send value in Ether" id=" 'getAssetAmount'ValueField" />
+		    </div>
+	     	<div id="getExpirationDiv">
+		  	<button class="btn col-sm-12" onclick="callFunc('getExpiration')">getExpiration</button>
+        <input class="form-control col-sm-12" type="value" name="'getExpiration'ValueField" placeholder="send value in Ether" id=" 'getExpiration'ValueField" />
+		    </div>
+	     	<div id="tradeDiv">
+		  	<button class="btn col-sm-12" onclick="callFunc('trade')">trade</button>
+		  	<input class="form-control col-sm-12" type="text" name="newBuyer" placeholder="newBuyer" id="tradenewBuyer" />
+        <input class="form-control col-sm-12" type="value" name="'trade'ValueField" placeholder="send value in Ether" id=" 'trade'ValueField" />
 		    </div>
 	     	<div id="exerciseDiv">
 		  	<button class="btn col-sm-12" onclick="callFunc('exercise')">exercise</button>
