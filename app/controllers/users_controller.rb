@@ -8,6 +8,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @title ||= @user.fullname
+    @title ||= "#{@user.fullname}'s Profile"
   end
 end
