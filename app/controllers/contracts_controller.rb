@@ -31,7 +31,7 @@ class ContractsController < ApplicationController
     @contract = @bid.contract
     @contract.confirmed!
     @contract.update(buyer_confirmed?: true, buyer_id: @bid.bidder_id)
-    @contract.save
+  
     respond_to do |format|
       format.js {}
     end
