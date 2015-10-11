@@ -31,12 +31,9 @@ class ContractsController < ApplicationController
     @contract = @bid.contract
     @contract.confirmed!
     @contract.update(buyer_confirmed?: true, buyer_id: @bid.bidder_id)
-    if @contract.save
-      flash[:notice] = 'Successfully confirmed.'
-      redirect_to root_path
-    else
-      flash[:notice] = 'Error! Could not confirm.'
-      redirect_to root_path
+    @contract.save
+    respond_to do |format|
+      format.js {}
     end
   end
   

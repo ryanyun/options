@@ -6,7 +6,7 @@
         <% if Bid.where(bidder_id: current_user).exists? && !Bid.where(bidder_id: current_user).select{|b| b.contract.accepted?}.empty? %>
           <ul class="dropdown-menu">
             <% Bid.where(bidder_id: current_user).select{|b| b.contract.accepted?}.select{|b| b.contract.accepted?}.each do |b| %>
-            <li class=""><%= User.find(b.contract.seller_id).fullname %> accepted your offer!<%= link_to 'Confirm', confirm_path(bid: b) %></li>
+            <li class=""><%= User.find(b.contract.seller_id).fullname %> accepted your offer!<%= link_to 'Confirm', confirm_path(bid: b), remote: true %></li>
             <% end %>
           </ul>
         <% end %>
