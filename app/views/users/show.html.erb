@@ -1,0 +1,31 @@
+<div class="users-show">
+  <div class="container">
+    <div class="user-profile">
+      <header>
+        <h1><%= @user.fullname %></h1>
+      </header>
+    </div>
+    <div class="row">
+      <div class="left-timeline col-sm-6">
+        <% if @user.contracts.exists? -%>
+          <%= render partial: 'contracts/contracts_list',
+              locals: { contracts: @user.contracts} %>
+        <% end %>
+      </div>
+      <div class="right-bio col-sm-6">
+        <ul class="list-group mt15">
+          <li class="list-group-item">Bids <span class="badge"><%= @user.bids.count %></span></li>
+          <li class="list-group-item">Contracts <span class="badge"><%= @user.contracts.count %></span></li>
+        </ul>
+        <div class="panel panel-default mt15" id="panels">
+          <div class="panel-heading">
+            User Bio
+          </div>
+          <p class="panel-body">
+            <%= @user.try(:bio) || 'N/A' %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
