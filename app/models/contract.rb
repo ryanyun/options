@@ -3,7 +3,7 @@ class Contract < ActiveRecord::Base
 
   belongs_to :seller, foreign_key: :seller_id, class_name: 'User'
   belongs_to :bidder, foreign_key: :bidder_id, class_name: 'User'
-  has_many :bids
+  has_many :bids, dependent: :destroy
 
   scope :available, -> { where(status: ['listed', 'pending', 'accepted']) }
 

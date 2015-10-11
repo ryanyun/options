@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable,
          :omniauthable, omniauth_providers: [:coinbase]
 
-  has_many :contracts, foreign_key: :seller_id, class_name: 'Contract'
+  has_many :contracts, foreign_key: :seller_id, class_name: 'Contract', dependent: :destroy
   has_many :bids, through: :contracts
 
   validates :uid, presence: true, uniqueness: { case_sensitive: false }
