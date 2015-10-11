@@ -1,6 +1,6 @@
 <nav class='navbar'>
   <ul class='nav navbar-nav'>
-    <li><%= link_to 'OPTIONS', root_path %></li>
+    <li><%= link_to 'SLASH OPTIONS', root_path %></li>
     <% if user_signed_in? %>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="main.html#" aria-expanded="false">Accepted Bids <span class="caret"></span></a>
         <% if Bid.where(bidder_id: current_user).exists? && !Bid.where(bidder_id: current_user).select{|b| b.contract.accepted?}.empty? %>
