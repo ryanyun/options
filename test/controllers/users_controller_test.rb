@@ -18,6 +18,6 @@ class UsersControllerTest < ActionController::TestCase
     sign_in chris
     get :show, id: chris.id
     assert_response :success
-    assert_equal chris, assigns(:chris)
+    assert_equal chris, assigns(:user)
   end
 end

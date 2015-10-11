@@ -38,6 +38,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    apipie-rails (0.3.4)
+      json
     arel (6.0.3)
     awesome_print (1.6.1)
     bcrypt (3.1.10)
@@ -195,6 +197,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  apipie-rails
   awesome_print
   byebug
   coffee-rails (~> 4.1.0)
