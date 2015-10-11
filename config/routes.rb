@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get '/accept' => 'contracts#accept'
   get '/confirm' => 'contracts#confirm'
 
+  get '/testing' => 'temptesting#test'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
