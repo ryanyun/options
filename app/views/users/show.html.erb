@@ -1,25 +1,72 @@
 <div class="users-show">
   <div class="container">
     <div class="row">
-      <div class="left-timeline col-sm-6">
-        <% if @user.contracts.exists? -%>
-          <%= render partial: 'users/contracts_list',
-              locals: { contracts: @user.contracts} %>
+      <div class="col-sm-7">
+        <% if @user == current_user -%>
+          <% if @user.contracts.exists? -%>
+            <h1>Your Listed Options</h1>
+            <%= render partial: 'users/contracts_list',
+                locals: { contracts: @user.contracts} %>
+          <% end %>
+        <% if Bid.where(bidder_id: @user).exists? %>
+            <h1>Your Bids</h1>
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <td>Seller</td>
+                  <td>Amount</td>
+                  <td>Price</td>
+                  <td>End Date</td>
+                  <td>Status</td>
+                </tr>
+              </thead>
+              <tbody>
+                <% Bid.where(bidder_id: @user).each do |b| %>
+                  <% if b.contract.pending? || b.contract.accepted? %>
+                  <tr>
+                    <td><%= User.find(b.contract.seller_id).fullname %></td>
+                    <td><%= b.contract.amount %></td>
+                    <td><%= b.contract.price %></td>
+                    <td><%= b.contract.end_time %></td>
+                    <% if b.contract.pending? %>
+                      <td><span class="label label-warning">Bid Pending</span></td>
+                    <% elsif b.contract.accepted? %>
+                      <td><span class="label label-success">Bid Accepted</span></td>
+                    <% end %>
+                  </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          <% end %>
         <% end %>
       </div>
-      <div class="right-bio col-sm-6">
-        <ul class="list-group mt15">
-          <li class="list-group-item">Bids <span class="badge"><%= @user.bids.count %></span></li>
-          <li class="list-group-item">Contracts <span class="badge"><%= @user.contracts.count %></span></li>
-        </ul>
-        <div class="panel panel-default mt15" id="panels">
-          <div class="panel-heading">
-            User Bio
-          </div>
-          <p class="panel-body">
-            <%= @user.try(:bio) || 'N/A' %>
-          </p>
-        </div>
+      <div class="col-sm-5">
+        <% if Contract.where(status: 'confirmed').where("buyer_id = ? or seller_id = ?", @user, @user) %>
+          <h1>Confirmed Options</h1>
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <td>Seller</td>
+                <td>Buyer</td>
+                <td>Amount</td>
+                <td>Price</td>
+                <td>Finished?</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% Contract.where(status: 'confirmed').where("buyer_id = ? or seller_id = ?", @user, @user).each do |c| %>
+                <tr>
+                  <td><%= User.find(c.seller_id).fullname %></td>
+                  <td><%= User.find(c.buyer_id).fullname %></td>
+                  <td><%= c.amount %></td>
+                  <td><%= c.price %></td>
+                  <td><%= c.status %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
       </div>
     </div>
   </div>
