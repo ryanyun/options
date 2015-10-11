@@ -61,7 +61,7 @@
                   <td><%= User.find(c.buyer_id).fullname %></td>
                   <td><%= c.amount %></td>
                   <td><%= c.price %></td>
-                  <td><%= c.status %></td>
+                  <td><%= c.finalized? ? 'true' : 'false' %></td>
                 </tr>
               <% end %>
             </tbody>

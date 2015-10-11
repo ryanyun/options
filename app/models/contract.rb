@@ -13,6 +13,7 @@ class Contract < ActiveRecord::Base
     state :accepted
     state :confirmed
     state :secured
+    state :finalized
 
     event :pend do
       transitions from: :listed, to: :pending
@@ -28,6 +29,10 @@ class Contract < ActiveRecord::Base
 
     event :secure do
       transitions from: :confirmed, to: :secured
+    end
+
+    event :finalize do
+      transitions from: :secured, to: :finalized
     end
   end
 end

@@ -25,7 +25,7 @@
       </li>
     
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="main.html#" aria-expanded="false">Confirmed Options <span class="caret"></span></a>
-        <% if Contract.where(status: 'confirmed').where("buyer_id = ? or seller_id = ?", current_user, current_user) %>
+        <% if Contract.where(status: 'confirmed').where("buyer_id = ? or seller_id = ?", current_user, current_user).exists? %>
           <ul class="dropdown-menu">
             <% Contract.where(status: 'confirmed').where("buyer_id = ? or seller_id = ?", current_user, current_user).each do |c| %>
               <li class="">Contract #<%= c.id %></li>
