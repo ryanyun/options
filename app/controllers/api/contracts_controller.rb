@@ -24,11 +24,6 @@ class Api::ContractsController < ApplicationController
   def show
     render json: @contract, status: 200
   end
-  param :earthquake, Hash, desc: 'Earthquake' do
-    param :lat, String, required: true, desc: 'Latitude'
-    param :lng, String, required: true, desc: 'Longitude'
-    param :sensitivity, String, required: true, desc: 'Shake Sensitivity'
-  end
 
   api :POST, '/contracts'
   param :contract, Hash, desc: 'Contract' do
