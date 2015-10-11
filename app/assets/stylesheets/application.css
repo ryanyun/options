@@ -21,3 +21,7 @@
   background:      -o-linear-gradient(180deg, #8e9eab 10%, #eef2f3 90%); /* Opera 11.10+ */
   background:         linear-gradient(180deg, #8e9eab 10%, #eef2f3 90%); /* W3C */
 }
+
+.foot {
+  padding-top: 25px;
+}
