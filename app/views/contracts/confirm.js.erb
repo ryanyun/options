@@ -1,5 +1,11 @@
 <% if @contract.valid? %>
-  
+  alert("did it work?");
+  $.get("/api/contracts/"+"<%= @contract.id %>", function(data) {
+    debugger;
+    var newOption = new OptionContract();
+    newOption.newOptionContract(data.seller.address,data.buyer.address,data.price, data.duration);
+    window.location.replace("/");
+  });
 <% else %>
-  
+  window.location.replace("/");
 <% end %>

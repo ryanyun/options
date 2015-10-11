@@ -62,13 +62,4 @@ OptionContract.prototype.storageAfterTX = function(result) {
     return afterTXstring;  
   });
 };
- 
-document.addEventListener("DOMContentLoaded", function(event) { 
-    // var option = new OptionContract();
-    // option.newOptionContract();
-
-    var option = new OptionContract();
-    option.getOptionContract("2ba12e5a3fec3627842fce19682bf981d6773d47");
-});
-
 
