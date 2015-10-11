@@ -24,6 +24,22 @@ class ContractsController < ApplicationController
   def accept
     @contract = Contract.find(params[:format])
     @contract.accept!
+    @contract.update(seller_confirmed?: true)
+    redirect_to root_path
+  end
+  
+  def confirm
+    @bid = Bid.find(params[:bid])
+    @contract = @bid.contract
+    @contract.confirmed!
+    @contract.update(buyer_confirmed?: true, buyer_id: @bid.bidder_id)
+    if @contract.save
+      flash[:notice] = 'Successfully confirmed.'
+      redirect_to root_path
+    else
+      flash[:notice] = 'Error! Could not confirm.'
+      redirect_to root_path
+    end
   end
   
   private

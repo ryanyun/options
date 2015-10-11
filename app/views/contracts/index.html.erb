@@ -3,50 +3,37 @@
     <div class="col-sm-12">
       <h1>Available Options</h1>
       <% if @contracts.exists? -%>
-        <ul>
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <td>Seller</td>
+            <td>Amount</td>
+            <td>Price</td>
+            <td>End Date</td>
+            <td>Status</td>
+          </tr>
+        </thead>
+        <tbody>
           <% @contracts.each do |c| -%>
-            <li>
-              <% if c.seller_id == current_user.id %>
-                You offered <%= c.amount %> bitcoin for <%= c.price %> bitcoin until <%= c.end_time %>
-              <% else %>
-                <%= User.find(c.seller_id).fullname %> is offering <%= c.amount %> bitcoin for <%= c.price %> bitcoin until <%= c.end_time %>
-                <% if c.bids.where(bidder_id: current_user.id).exists? %>
-                  <i>Bid Pending</i>
-                <% elsif c.seller_id != current_user.id %>
-                  <%= link_to "Bid", bids_path(bid: {bidder_id: current_user.id, contract_id: c.id}), method: :create  %>
-                <% end %>
+            <tr>
+              <td><%= c.seller_id == current_user.id ? 'You' : c.seller.fullname %></td>
+              <td><%= number_to_currency(c.amount) %></td>
+              <td><%= number_to_currency(c.price) %></td>
+              <td><%= c.end_time %></td>
+              <% if c.accepted? %>
+                <td><span class="label label-success">Bid Accepted</span></td>
+              <% elsif c.seller_id != current_user.id && (c.listed? || c.pending?) && Bid.where(bidder_id: current_user.id, contract_id: c.id).empty? %> 
+                <td><i><%= link_to "Bid Now", bids_path(bid: {bidder_id: current_user.id, contract_id: c.id}), method: :post %></i></td>
+              <% elsif (c.seller_id == current_user.id && c.pending?) || Bid.where(bidder_id: current_user.id, contract_id: c.id).exists? %>
+                <td><span class="label label-warning">Bid Pending</span></td>
+              <% elsif c.seller_id == current_user.id && c.listed? %>
+                <td><span class="label label-danger">No Bids Yet</span></td>
               <% end %>
-            </li>
+            </tr>
           <% end %>
-        </ul>
-      <% end %>
-    </div>
-  </div>
 
-  <div class='row'>
-    <div class="left-timeline col-sm-12">
-      <% if @contracts.exists? -%>
-        <ul>
-          <% @contracts.each do |contract| -%>
-            <li>
-              <time>
-                <span><%= contract.created_at.day %></span>
-                <small><%= contract.created_at.strftime('%b') %></small>
-              </time>
-              <header>
-                <h4 class='m0 mt15 mb15'> James uploaded a video. </h4>
-                <h4 class='m0 mt15 mb15'> <%= contract.seller.fullname %> is offering <%= number_to_currency(contract.amount) %> for <%= number_to_currency(contract.price) %> until <%= contract.end_time.to_date.to_formatted_s(:long) %></h4>
-              </header>
-              <p>
-                <% if contract.bids.where(bidder: current_user).exists? -%>
-                  <%= link_to "Bid", bids_path(bid: {bidder_id: current_user.id, contract_id: contract.id}), class: 'btn btn-primary', method: :post  %>
-                <% else -%>
-                  <span class="label label-warning">Bid Pending</span>
-                <% end %>
-              </p>
-            </li>
-          <% end %>
-        </ul>
+        </tbody>
+      </table>
       <% end %>
     </div>
   </div>

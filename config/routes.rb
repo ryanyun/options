@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :bids
   resources :users, only: :index
   get '/accept' => 'contracts#accept'
+  get '/confirm' => 'contracts#confirm'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

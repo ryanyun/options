@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   end
 
   def have_offers?
-    bids.exists?
+    !bids.select{|b| b.contract.pending?}.empty?
   end
 
   def email_required?

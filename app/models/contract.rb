@@ -5,7 +5,7 @@ class Contract < ActiveRecord::Base
   belongs_to :bidder, foreign_key: :bidder_id, class_name: 'User'
   has_many :bids
 
-  scope :available, -> { where(status: ['listed', 'pending']) }
+  scope :available, -> { where(status: ['listed', 'pending', 'accepted']) }
 
   aasm column: :status do
     state :listed, initial: true
