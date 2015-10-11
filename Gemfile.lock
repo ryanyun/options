@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/Apipie/apipie-rails.git
+  revision: 4b9bbd30c1233f836851b0303f55adbb93320189
+  specs:
+    apipie-rails (0.3.4)
+      json
+
 GEM
   remote: https://rubygems.org/
   remote: https://dresssed.com/gems/1e93f8c6209368f4fe1c/
@@ -38,8 +45,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    apipie-rails (0.3.4)
-      json
     arel (6.0.3)
     awesome_print (1.6.1)
     bcrypt (3.1.10)
@@ -197,7 +202,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
-  apipie-rails
+  apipie-rails!
   awesome_print
   byebug
   coffee-rails (~> 4.1.0)

@@ -8,8 +8,12 @@ class Api::ContractsController < ApplicationController
   end
 
   api :GET, '/contracts'
+  param :status,
+        ['listed', 'pending', 'accepted', 'confirmed', 'secured'],
+        'Status of contract'
   def index
-    @contracts = Contract.all
+    @contracts = Contract.
+                 send(params[:status].present? ? params[:status].to_sym : :all)
 
     respond_to do |format|
       format.json { render json: @contracts }

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'aasm'
-gem 'apipie-rails'
+gem 'apipie-rails', github: 'Apipie/apipie-rails'
 gem 'coinbase'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'devise'
