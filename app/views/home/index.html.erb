@@ -8,14 +8,8 @@
           <span class="sr-only">Toggle navigation</span>
           <span>MENU</span>
         </button>
-        <a href="#" class="navbar-brand">OptionsContract</a>
+        <%= link_to 'Options', root_path, class: 'navbar-brand'%>
       </div>
-      <div class="collapse navbar-collapse" id="navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="active"><%= link_to 'Home', root_path %></li>
-          <li><%= link_to 'Login', new_user_session_path %></li>
-       </ul>
-     </div>
    </div>
  </div>
  <div class="landing one-page">
@@ -23,12 +17,12 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-md-12">
-          <h2 class="text-xs-center">Easily do invest in options with confidence!</h2>
+          <h2 class="text-xs-center">Easily invest in options with confidence!</h2>
         </div>
       </div>
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <p class="lead text-xs-center">Tired of investing carelessly? Invest with confidence with OptionContract!</p>
+          <p class="lead text-xs-center">Tired of investing carelessly? Invest with confidence with Options!</p>
         </div>
       </div>
       <div class="row mt20">
@@ -36,7 +30,19 @@
           <form class="signup-form form-inline">
             <div class="text-center">
               <div class="form-group">
-                <%= link_to 'Click to Login', new_user_session_path, class: 'btn btn-outline-primary' %>
+                <%= form_for resource, as: resource_name, url: session_path(resource_name),
+                             html: { class: "form-horizontal col-xs-12 col-md-6 col-md-offset-3" } do |f| %>
+
+                  <%- if devise_mapping.omniauthable? %>
+                    <p class="text-center">
+                      <%- resource_class.omniauth_providers.each do |provider| %>
+                        <%= link_to fa_icon_tag("#{provider}-sign") + " Sign in with #{provider.to_s.titleize}",
+                            omniauth_authorize_path(resource_name, provider),
+                            class: 'btn btn-outline-primary' %>
+                      <% end -%>
+                    </p>
+                  <% end -%>
+                <% end %>
               </div>
             </div>
           </form>
@@ -45,19 +51,4 @@
     </div>
   </div>
 </div>
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6">
-          <ul class="list-unstyled list-inline text-xs-center">
-            <li><a href="#">Terms</a></li>
-            <li><a href="#">Privacy</a></li>
-          </ul>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 text-right text-xs-center">
-          <p>Built by <a href="http://kantan.io/">Kantan Designs</a>.</p>
-        </div>
-      </div>
-    </div>
-  </footer>
 </div>
