@@ -47,7 +47,7 @@ class Api::ContractsController < ApplicationController
     end
   end
 
-  api :POST, '/contracts'
+  api :PUT, '/contracts'
   param :id, :number, desc: 'Id (primary key) of Contract'
   param :contract, Hash, desc: 'Contract' do
     param :buyer_id, :number, desc: 'Buyer (User) id'
