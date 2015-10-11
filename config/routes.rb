@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :contracts
   resources :bids
-  resources :users, only: :index
+  resources :users, only: [:index, :show]
   get '/accept' => 'contracts#accept'
   get '/confirm' => 'contracts#confirm'
 

@@ -4,4 +4,9 @@ class UsersController < ApplicationController
   def index
     @title ||= 'Welcome. What would you like to do today?'
   end
+
+  def show
+    @user = User.find(params[:id])
+    @title ||= @user.fullname
+  end
 end
