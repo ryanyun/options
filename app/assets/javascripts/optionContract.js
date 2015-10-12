@@ -16,6 +16,7 @@ OptionContract.prototype.newOptionContract = function(sellerAddress,buyerAddress
   Solidity(self.contractCode).call("newContract", self.privkey).then(function(contractObj){
     var args = [sellerAddress,buyerAddress,amount,expirationTimeInSeconds,""];
     var etherGas = 2;
+      debugger;
       contractObj.state.createOption.apply(null,args).txParams({value : etherGas * eth}).callFrom(self.privkey).then(function(result){
         self.storageAfterTX(result).then(function (contractData) { 
           debugger;
