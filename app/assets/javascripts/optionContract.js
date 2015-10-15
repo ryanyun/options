@@ -14,8 +14,15 @@ function OptionContract () {
 OptionContract.prototype.newOptionContract = function(sellerAddress,buyerAddress,amount,expirationTimeInSeconds){
   var self = this;
   Solidity(self.contractCode).call("newContract", self.privkey).then(function(contractObj){
-    self.contract = contractObj;
-    self.createOption(sellerAddress,buyerAddress,amount,expirationTimeInSeconds);
+    var args = [sellerAddress,buyerAddress,amount,expirationTimeInSeconds,""];
+    var etherGas = 2;
+      debugger;
+      contractObj.state.createOption.apply(null,args).txParams({value : etherGas * eth}).callFrom(self.privkey).then(function(result){
+        self.storageAfterTX(result).then(function (contractData) { 
+          debugger;
+          return contractData;
+        });
+      });
   });
 };
 
@@ -25,7 +32,7 @@ OptionContract.prototype.createOption = function(sellerAddress, buyerAddress,amo
   var etherGas = 2;
   self.contract.state.createOption.apply(null,args).txParams({value : etherGas * eth}).callFrom(self.privkey).then(function(result){
       self.storageAfterTX(result).then(function (contractData) { 
-        debugger;
+        return contractData;
       });
     });
 };
@@ -43,6 +50,7 @@ OptionContract.prototype.getData = function(){
   self.contract.state.getAssetAmount.apply(null,args).txParams({value : etherGas * eth}).callFrom(self.privkey).then(function(result){
       self.storageAfterTX(result).then(function (contractData) { 
         debugger;
+        return contractData;
       });
     });
 };
