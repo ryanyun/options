@@ -1,9 +1,0 @@
-appName: eth_options
-developer: walter
-email: walter.beller.morales@gmail.com
-appURL: localhost
-repo: options
-apiURL: 'http://hacknet.blockapps.net'
-transferGasLimit: '21000'
-contractGasLimit: '10000000'
-gasPrice: '50000000000'

@@ -1,21 +1,10 @@
-alert("contract confirm");
 <% if @contract.valid? %>
-//  $.get("/api/contracts/"+"<%= @contract.id %>", function(data) {
-//    debugger;
-//    var newOption = new OptionContract();
-//    newOption.newOptionContract(data.seller.address,data.buyer.address,data.price, data.duration);
-//    window.location.replace("/");
+  alert("contract confirmed");
   $.get("/api/contracts/<%= @contract.id %>", function(data) {
-    var option = new OptionContract()
+    var option = new OptionContract("<%= @contract.id %>")
     option.newOptionContract(data.seller.oauth_token,data.buyer.oauth_token,data.price, data.duration);
-    // contractData = newOption.getData();
-    
-    // console.log(contractData);
-    // $.put("/api/contracts/<%= @contract.id %>?address="+contractData.self function(){
-    //   console.log("contract saved in blockchain!");
-    //   window.location.replace("/");
-    // });
   });
 <% else %>
+  alert("contract failed");
   window.location.replace("/");
 <% end %>

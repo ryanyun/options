@@ -1,7 +1,7 @@
 <div class="users-show">
   <div class="container">
     <div class="row">
-      <div class="col-sm-7">
+      <div class="col-sm-6">
         <% if @user == current_user -%>
           <% if @user.contracts.exists? -%>
             <h1>Your Listed Options</h1>
@@ -41,7 +41,7 @@
           <% end %>
         <% end %>
       </div>
-      <div class="col-sm-5">
+      <div class="col-sm-6">
         <% if Contract.where(status: 'confirmed').where("buyer_id = ? or seller_id = ?", @user, @user) %>
           <h1>Confirmed Options</h1>
           <table class="table table-hover table-striped">
@@ -51,7 +51,7 @@
                 <td>Buyer</td>
                 <td>Amount</td>
                 <td>Price</td>
-                <td>Finished?</td>
+                <td>Address</td>
               </tr>
             </thead>
             <tbody>
@@ -61,7 +61,7 @@
                   <td><%= User.find(c.buyer_id).fullname %></td>
                   <td><%= c.amount %></td>
                   <td><%= c.price %></td>
-                  <td><%= c.finalized? ? 'true' : 'false' %></td>
+                  <td><%= link_to c.address, "http://hacknet.blockapps.net/eth/v1.0/storage?address=#{c.address}" if c.address %></td>
                 </tr>
               <% end %>
             </tbody>
