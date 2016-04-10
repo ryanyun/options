@@ -15,7 +15,7 @@ The smart contract will automatically disperse the funds when the terms of the o
 
 ## Background
 
-This project was developed in less than 36 hours during Barclays' [Heroes vs. Hackers](http://heroesvshackers.com/) Hackathon with the goal of applying blockchain technology to financial services. 
+This project was developed in less than 36 hours during Barclays' [Heroes vs. Hackers](http://heroesvshackers.com/nyc/) Hackathon with the goal of applying blockchain technology to financial services. 
 
 
 ## Features
